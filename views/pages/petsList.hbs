@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="ru">
+<html>
+<head>
+  {{> scripts }}
+  <title>Shelter Website</title>
+  <meta charset="utf-8">
+  <meta name="keywords" content="Приют">
+  <meta name="viewport" content="width=device-width, user-scalable=no">
+  <style>
+    @import url('https://fonts.googleapis.com/css?family=Poppins');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 20px 100px;
+      background: #7b7842;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 99;
+    }
+
+    .logo {
+      font-size: 2em;
+      color: black;
+      user-select: none;
+    }
+
+    .navigation a {
+      position: relative;
+      font-size: 1.1em;
+      color: black;
+      text-decoration: none;
+      font-weight: 500;
+      margin-left: 40px;
+    }
+
+    .navigation .btnLogin-popup {
+      width: 130px;
+      height: 50px;
+      background: #7b7842;
+      border: 2px solid white;
+      outline: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1.1em;
+      color: white;
+      font-weight: 500;
+      margin-left: 40px;
+    }
+
+    .navigation .btnLogin-popup:hover {
+      background: white;
+      color: black;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: #a59c46;
+      background-size: cover;
+    }
+
+    #wrapper-login {
+      position: relative;
+      width: 400px;
+      height: 440px;
+      background: transparent;
+      border: 2px solid rgb(255, 255, 255, .5);
+      border-radius: 20px;
+      backdrop-filter: blur(20px);
+      box-shadow: 0 0 30px rgb(0, 0, 0, .5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    #wrapper-register {
+      position: relative;
+      width: 400px;
+      height: 440px;
+      background: transparent;
+      border: 2px solid rgb(255, 255, 255, .5);
+      border-radius: 20px;
+      backdrop-filter: blur(20px);
+      box-shadow: 0 0 30px rgb(0, 0, 0, .5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .icon-close {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 45px;
+      height: 45px;
+      background: #7b7842;
+      font-size: 2em;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-bottom-left-radius: 20px;
+    }
+
+    .form-box {
+      width: 100%;
+      padding: 40px;
+    }
+
+    .form-box h2 {
+      font-size: 2em;
+      color: black;
+      text-align: center;
+    }
+
+    .input-box {
+      position: relative;
+      width: 100%;
+      height: 50px;
+    }
+
+    .btn {
+      width: 30%;
+      height: 30px;
+    }
+
+    .login-register {
+      font-size: .9em;
+      color: black;
+      text-align: center;
+      font-weight: 500;
+      margin: 25px 0 10px;
+    }
+
+    .login-register p a {
+      color: black;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .login-register p a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+<header>
+  <h2 class="logo">Shelter</h2>
+  <nav class="navigation">
+    <a href="/">Home</a>
+    <a href="/petsList">Service</a>
+    <button class="btnLogin-popup" onclick="showLoginFormFirst()">Login</button>
+    <button class="btnLogin-popup" onclick="logout()">LogOut</button>
+  </nav>
+</header>
+
+<div id="wrapper-login" style="display: none;">
+  <button class="icon-close" onclick="noShowLoginForm()">x</button>
+  <div class="form-box login">
+    <h2>Login</h2>
+    <form>
+      <div class="input-box">
+        <label>
+          Email:<br>
+          <input type="email" id="signInEmail" required>
+        </label>
+      </div>
+      <div class="input-box">
+        <label>
+          Password:<br>
+          <input type="password" id="signInPassword" required>
+        </label>
+      </div>
+      <input type="button" class="btn" onclick=signInClicked() value="Login">
+      <div class="login-register">
+        <p>Don't have an account? <input type="button" value="Register" onclick="showRegisterForm()" /></p>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div id="wrapper-register" style="display: none;">
+  <button class="icon-close" onclick="noShowRegisterForm()">x</button>
+  <div class="form-box register">
+    <h2>Register</h2>
+    <form>
+      <div class="input-box">
+        <label>
+          Email:<br>
+          <input type="email" id="signUpEmail" required>
+        </label>
+      </div>
+      <div class="input-box">
+        <label>
+          Login:<br>
+          <input type="text" id="signUpLogin" required>
+        </label>
+      </div>
+      <div class="input-box">
+        <label>
+          Password:<br>
+          <input type="password" id="signUpPassword" required>
+        </label>
+      </div>
+      <input type="button" class="btn" onclick=signUpClicked() value="Register">
+      <div class="login-register">
+        <p>Already have an account? <input type="button" value="Login" onclick="showLoginFormSecond()" /></p>
+      </div>
+    </form>
+  </div>
+</div>
+
+<h1>Pets</h1>
+<button onclick="showCreatePetForm()">Create Pet</button>
+<div id="create-pet-form" style="display: none;">
+  <form method="POST" action="/pet/create/">
+    <div class="input-box">
+      <label>
+        Name:<br>
+        <input type="text" name="name">
+      </label>
+    </div>
+    <div class="input-box">
+      <label>
+        Color:<br>
+        <input type="text" name="color">
+      </label>
+    </div>
+    <div class="input-box">
+      <label>
+        Description:<br>
+        <input type="text" name="description">
+      </label>
+    </div>
+    <div class="input-box">
+      <label>
+        Birthday:<br>
+        <input type="date" name="birthday">
+      </label>
+    </div>
+    <div class="input-box">
+      <label>
+        Owner:<br>
+        <input type="number" name="ownerId">
+      </label>
+    </div>
+    <div class="input-box">
+      <label>
+        Breed:<br>
+        <input type="number" name="breedId">
+      </label>
+    </div>
+    <button type="submit">Create</button>
+  </form>
+</div>
+
+<div class="pets">
+  <h1>List of pets</h1>
+  {{#each pets}}
+    <div class="list_pets">
+      <div class="pet_name"> {{name}} </div>
+      <div class="pet_description">
+        <p class="text"> {{description}} </p>
+      </div>
+      <div class="pet_color">
+        <p class="text"> {{color}} </p>
+      </div>
+      <div class="pet_birthday">
+        <p class="text"> {{birthday}} </p>
+      </div>
+      <button onclick="deletePet('{{id}}')">Delete</button>
+    </div>
+  {{/each}}
+</div>
+</body>
+</html>

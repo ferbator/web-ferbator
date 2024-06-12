@@ -1,0 +1,124 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Times New Roman", "Aria", serif;
+
+    background-color: #7b7842;
+    /*color: #7b7842;*/
+}
+
+
+h1 {
+    text-align: center;
+    margin-top: 20px;
+}
+
+#animal-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-gap: 20px;
+    margin: 20px;
+}
+
+.profile-info {
+    display: block;
+    background-color: #a59c46;
+    width: 80%;
+    margin-left: 12%;
+}
+
+.animal-card {
+    position: relative;
+    cursor: pointer;
+}
+
+.animal-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.animal-card .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.animal-card:hover .overlay {
+    opacity: 1;
+}
+
+#modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+#modal-content {
+    background-color: #fff;
+    padding: 20px;
+    max-width: 600px;
+    text-align: center;
+    position: relative;
+}
+
+#modal-title {
+    margin-bottom: 10px;
+}
+
+#modal-image {
+    width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+#modal-description {
+    margin-bottom: 10px;
+}
+
+#modal-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+    color: #fff;
+}
+
+.menuOfPage a{
+    text-decoration: none;
+    color: #e0d46b;
+    text-transform: uppercase;
+    line-height: 1;
+    -webkit-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+.menuOfPage{
+    display: block;
+    margin-left: 40%;
+    margin-right: 40%;
+
+}
+.menuOfPage a:hover{
+    color: black;
+}

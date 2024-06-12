@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>ToDoList</title>
+  <meta charset="UTF-8">
+  <meta name="keywords" content="Карепин, Денис, Дмитриевич, TODO, list">
+  <link rel="stylesheet" href="toDoStyle.css">
+  <script src="currentPage.js"></script>
+  <script src="users.js"></script>
+
+</head>
+<body>
+{{> menu }}
+<header>
+  <div class="containerTODOList">
+    <h1 id="TODO__head">TODO list</h1>
+    <form class="main__todo-form">
+      <input class="main__todo-input" type="text" placeholder="Input task...">
+      <button class="main__add-button" type="submit">+</button>
+    </form>
+    <ul class="main__todo-items"></ul>
+  </div>
+  <script src="toDoList.js"></script>
+</header>
+<div id="users">
+  <div class="preloader">
+    <img src="icons/1fdQ.gif" />
+    <p>Загрузка фото...</p>
+  </div>
+</div>
+{{> footer }}
+</body>
+</html>

@@ -1,0 +1,198 @@
+<head>
+  <title>Shelter Website</title>
+  <meta charset="utf-8">
+  <meta name="keywords" content="Приют">
+  <meta name="viewport" content="width=device-width, user-scalable=no">
+  <style>
+    .confirm {
+      font-size: 14px;
+      flex-grow: 0;
+    }
+
+    .form__group {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 1%;
+      margin-bottom: 20px;
+    }
+
+    .auth_form {
+      background: white;
+    }
+
+    #add.user {
+      height: 50px;
+      text-transform: uppercase;
+      border-radius: 7px;
+      max-width: 100%;
+    }
+
+    #login {
+      text-align: center;
+    }
+  </style>
+</head>
+<section class="section">
+  <div class="container">
+    <div class="column form__column">
+      <div class="section__header">
+        <h2 class="section__title">Регистрация</h2>
+      </div>
+
+      <form class="form auth_form" id="auth_form">
+        <div class="container">
+          <div class="form__group form__item">
+            <label for="name"><b>Имя</b></label>
+            <input class="item__text" id="name" type="text" placeholder="Введите аше имя" autocomplete="name">
+          </div>
+
+          <div class="form__group form__item">
+            <label for="email"><b>Почта</b></label>
+            <input class="item__text" id="email" type="text" placeholder="Введите email" required="required"
+                   autocomplete="email">
+          </div>
+
+          <div class="form__group form__item">
+            <label for="login"><b>Логин</b></label>
+            <input class="item__text" id="login" type="text" placeholder="Введите login" required="required"
+                   autocomplete="username" minlength="3" maxlength="20">
+          </div>
+
+          <div class="form__group form__item">
+            <label for="psw"><b>Пароль</b></label>
+            <input class="item__text" id="password" type="password" placeholder="Введите пароль" required="required"
+                   autocomplete="new-password">
+          </div>
+
+          <div class="form__group form__item">
+            <label for="psw-repeat"><b>Повторите пароль</b></label>
+            <input class="item__text" id="password-repeat" type="password" placeholder="Введите пароль еще раз"
+                   name="psw-repeat" required="required" autocomplete="new-password">
+          </div>
+
+          <div class="form__line form__item">
+            <input type="checkbox" required>
+            <span class="confirm">Нажимая кнопку "Зарегистрироваться", Вы даёте свое согласие на обработку введенной персональной информации в соответствии с Федеральным Законом "О персональных данных"</span>
+          </div>
+
+          <div class="form__group form__item">
+            <button type="submit" class="user" id="add">Зарегистрироваться</button>
+          </div>
+        </div>
+      </form>
+
+      <span class="container form__line" id="login">Уже есть аккаунт? <a href="/login">Войти</a></span>
+
+    </div>
+  </div>
+</section>
+
+<script>
+  const hideSignContainer = () => {
+    let element1 = document.getElementById("loggedout_template");
+    let element2 = document.getElementById("loggedin_template");
+    if (element1) {
+      element1.hidden = true;
+    }
+    if (element2) {
+      element2.hidden = true;
+    }
+  };
+
+  hideSignContainer();
+
+  const getSignUpData = () => {
+    let password_first = document.getElementById("password").value;
+    let password_repeat = document.getElementById("password-repeat").value;
+
+    if (password_repeat !== password_first) {
+      throw new Error("Пароли не совпадают");
+    }
+
+    return {
+      name: document.getElementById("name").value,
+      email: document.getElementById("email").value,
+      login: document.getElementById("login").value,
+      password: document.getElementById("password").value,
+      superTokenId: ""
+    };
+  };
+
+  const createUser = (data) => {
+    fetch("/users", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      credentials: "include",
+      mode: "same-origin",
+      body: JSON.stringify(data)
+    })
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          return error();
+        }
+      })
+      .then((response) => {
+        setServerTime(response);
+        alert("You are successfully registered in system");
+        window.location.href = "/";
+      });
+  };
+
+  let signupForm = document.getElementById("auth_form");
+  signupForm.addEventListener("submit", (event) => {
+    try {
+      event.preventDefault();
+      let data = getSignUpData();
+
+      fetch("/auth/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        credentials: "include",
+        mode: "same-origin",
+        body: JSON.stringify({
+          formFields: [
+            {
+              id: "email",
+              value: data.email
+            },
+            {
+              id: "password",
+              value: data.password
+            }
+          ]
+        })
+      })
+        .then((response) => {
+          if (response.ok) {
+            return response.json();
+          } else {
+            throw new Error(`Failed to sign un user: ${response.statusText}`);
+          }
+        })
+        .then((response) => {
+          if (response.status === "OK") {
+            data.superTokenId = response.user.id;
+            createUser(data);
+            window.location.href = "/";
+          } else {
+            let i = 0;
+            while (response.formFields[String(i)] !== undefined) {
+              console.error(response.formFields[String(i)].error);
+              i++;
+            }
+            throw new Error(`Данные в форме введены с ошибками`);
+          }
+        });
+    } catch (e) {
+      console.error(e);
+    }
+  });
+    {{> scripts }}
+</script>

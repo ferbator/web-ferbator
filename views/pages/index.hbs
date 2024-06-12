@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <title>My resume</title>
+  <meta charset="utf-8">
+  <meta name="keywords" content="Карепин, Денис, Дмитриевич, резюме">
+  <meta name="viewport" content="width=device-width, user-scalable=no">
+  <link rel="stylesheet" href="myStyle.css">
+  <script src="timeLoad.js"></script>
+  <script src="currentPage.js"></script>
+</head>
+<body>
+{{> menu }}
+<div class="allContent">
+  <header>
+    <h1 class="header">Резюме разработчика.</h1>
+  </header>
+  <main>
+    <section>
+      <div class="section">
+        <img class="photo" src="gallery/avatar.png" alt="photo">
+        <div class="aboutMe" id="mainPage">
+          <h2>Обо мне.</h2>
+          <h4>Образование.</h4>
+          <ul>
+            <li>МБОУ «Школа № 47», Ростов-на-Дону 2009 - 2020</li>
+            <li>ITMO Университет, Санкт-Петербург 2020 - ...</li>
+          </ul>
+        </div>
+        <div class="myContacts">
+          <h4>Контактная информация.</h4>
+          <ul class="logos">
+            <li>
+              <nav><a href="tel:89185217371">
+                <img class="logo" src="icons/phone.png" alt="photo">
+              </a></nav>
+            </li>
+            <li>
+              <nav><a href="mailto:HTMLDEN55@gmail.com">
+                <img class="logo" src="icons/mail.png" alt="photo">
+              </a></nav>
+            </li>
+            <li>
+              <nav><a href="https://github.com/ferbator">
+                <img class="logo" src="icons/github.png" alt="photo">
+              </a></nav>
+            </li>
+            <li>
+              <nav><a href="https://t.me/zaiac">
+                <img class="logo" src="icons/telegram.png" alt="photo">
+              </a></nav>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <aside class="aside">
+      <h4>Моя любимая цитата.</h4>
+      <blockquote>
+        <p>Каждый может кинуть камень в волка, но не каждый может кинуть волка в камень.</p>
+        <cite>- Безумно можно быть первым</cite>
+      </blockquote>
+
+      <h4>Просто Шрек.</h4>
+      <pre>
+ ⡴⠑⡄⠀⠀⠀⠀⠀⠀⠀ ⣀⣀⣤⣤⣤⣀⡀
+⠸⡇⠀⠿⡀⠀⠀⠀⣀⡴⢿⣿⣿⣿⣿⣿⣿⣿⣷⣦⡀
+⠀⠀⠀⠀⠑⢄⣠⠾⠁⣀⣄⡈⠙⣿⣿⣿⣿⣿⣿⣿⣿⣆
+⠀⠀⠀⠀⢀⡀⠁⠀⠀⠈⠙⠛⠂⠈⣿⣿⣿⣿⣿⠿⡿⢿⣆
+⠀⠀⠀⢀⡾⣁⣀⠀⠴⠂⠙⣗⡀⠀⢻⣿⣿⠭⢤⣴⣦⣤⣹⠀⠀⠀⢀⢴⣶⣆
+⠀⠀⢀⣾⣿⣿⣿⣷⣮⣽⣾⣿⣥⣴⣿⣿⡿⢂⠔⢚⡿⢿⣿⣦⣴⣾⠸⣼⡿
+⠀⢀⡞⠁⠙⠻⠿⠟⠉⠀⠛⢹⣿⣿⣿⣿⣿⣌⢤⣼⣿⣾⣿⡟⠉
+⠀⣾⣷⣶⠇⠀⠀⣤⣄⣀⡀⠈⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇
+⠀⠉⠈⠉⠀⠀⢦⡈⢻⣿⣿⣿⣶⣶⣶⣶⣤⣽⡹⣿⣿⣿⣿⡇
+⠀⠀⠀⠀⠀⠀⠀⠉⠲⣽⡻⢿⣿⣿⣿⣿⣿⣿⣷⣜⣿⣿⣿⡇
+⠀⠀ ⠀⠀⠀⠀⠀⢸⣿⣿⣷⣶⣮⣭⣽⣿⣿⣿⣿⣿⣿⣿⠇
+⠀⠀⠀⠀⠀⠀⣀⣀⣈⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠇
+⠀⠀⠀⠀⠀⠀⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠃
+    </pre>
+      <h4>Код на жаба.</h4>
+      <pre><code>
+        private void initializeBlocked() {
+            int tmpXStart = (int) (viewPort.getX() / tileWidth - 1) % 300;
+            int tmpYStart = (int) (viewPort.getY() / tileHeight - 1);
+            int tmpXFinish = (int) ((viewPort.getWidth()) / tileWidth) - tmpXStart - 1;
+            int tmpYFinish = (int) ((viewPort.getHeight()) / tileHeight) - tmpYStart - 1;
+
+            for (int l = 0; l < numberOfLayers; l++) {
+                String layerValue = map.getLayerProperty(l, "blocked", "false");
+                if (layerValue.equals("true")) {
+                    for (int c = Math.abs(tmpXStart); c < Math.abs(tmpXFinish) % 300; c++) {
+                        for (int r = Math.abs(tmpYStart) % 300; r < Math.abs(tmpYFinish) % 300; r++) {
+                            if (map.getTileId(c, r, l) != 0) {
+                                blocked[c][r] = true;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    </code></pre>
+    </aside>
+    <div id="grid">
+      <div>Фильм</div>
+      <div>Оценка кинопоиска</div>
+      <div>Моя оценка</div>
+      <div>Форест Гамп</div>
+      <div>8.9</div>
+      <div>10</div>
+      <div>Воспоминание об убийстве</div>
+      <div>7.7</div>
+      <div>10</div>
+      <div>Достать ножи</div>
+      <div>8.0</div>
+      <div>10</div>
+      <div>Дюна</div>
+      <div>7.7</div>
+      <div>8</div>
+    </div>
+  </main>
+  {{> footer }}
+  <div id="timeOfLoading"></div>
+</div>
+</body>
+</html>
+
